@@ -7,7 +7,7 @@ import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemButton } f
 import MenuIcon from '@mui/icons-material/Menu';
 
 //consts
-import { menuItems } from '../../consts/headerConsts';
+import { HEADER_TITLE, MENU_ITEMS } from '../../consts/headerConsts';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -30,7 +30,7 @@ const Header = () => {
           </IconButton>
 
           <S.HeaderTitle variant="h6">
-            האפליקציה שלי
+            {HEADER_TITLE}
           </S.HeaderTitle>
           
         </Toolbar>
@@ -42,7 +42,7 @@ const Header = () => {
           onClick={toggleDrawer(false)}
         >
           <List>
-            {menuItems.map((item) => (
+            {MENU_ITEMS.map((item) => (
               <ListItem key={item.text} disablePadding>
                 <ListItemButton component={Link} to={item.path}>
                   <S.itemText primary={item.text} />
