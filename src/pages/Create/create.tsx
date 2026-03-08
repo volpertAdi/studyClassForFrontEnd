@@ -8,38 +8,35 @@ import { STUDENT_FIELDS, CLASS_FIELDS, emptyStudent, emptyClass } from '../../co
 //api
 import { createUser } from '../../Api/user.api';
 import { createClassroom } from '../../Api/classroom.api';
+//context
+import { useNotification } from '../../context/NotificationContext';
 
 const CreatePage = () => {
+  const { showModal } = useNotification();
+
   const handleStudentSave = async (data: student) => {
     try {
-      const payload: student = {
-        ...data,
-        age: Number(data.age)
-      };
-
-      console.log('Sending user data...', payload);
-      const result = await createUser(payload);
-      alert('Student added successfully!');
-      console.log('NestJS Response:', result);
-    } catch (error) {
-      alert('Failed to add student');
+      await createUser(data);
+      showModal('Success!', `The student ${data.firstName} was added.`, 'success');
+      
+    } catch (error: any) {
+      const errorMsg = error.response?.data?.message || 'Something went wrong';
+      const formattedError = Array.isArray(errorMsg) ? errorMsg.join('\n• ') : errorMsg;
+      
+      showModal('Error Saving Student', formattedError, 'error');
     }
   };
 
   const handleClassSave = async (data: Classroom) => {
     try {
-      const payload: Classroom = {
-        ...data,
-        maxSeats: Number(data.maxSeats)
-      };
-      payload.seatsLeft = payload.maxSeats;
-
-      console.log('Sending Classroom data...', payload);
-      const result = await createClassroom(payload);
-      alert('Classroom created successfully!');
-      console.log('NestJS Response:', result);
-    } catch (error) {
-      alert('Failed to create classroom');
+      await createClassroom(data);
+      showModal('Created!', `Classroom ${data.name} is ready.`, 'success');
+      
+    } catch (error: any) {
+      const errorMsg = error.response?.data?.message || 'Server error';
+      const formattedError = Array.isArray(errorMsg) ? errorMsg.join('\n• ') : errorMsg;
+      
+      showModal('Error Creating Classroom', formattedError, 'error');
     }
   };
 
@@ -63,5 +60,4 @@ const CreatePage = () => {
 };
 
 export default CreatePage;
-
 
