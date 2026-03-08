@@ -18,7 +18,7 @@ const Header = () => {
 
   return (
     <>
-      <AppBar position="static">
+      <S.StyledAppBar position="static">
         <Toolbar>
           <IconButton
             edge="start"
@@ -34,7 +34,7 @@ const Header = () => {
           </S.HeaderTitle>
           
         </Toolbar>
-      </AppBar>
+      </S.StyledAppBar>
 
       <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
         <S.DrawerBox 

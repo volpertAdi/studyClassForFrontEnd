@@ -1,4 +1,8 @@
-import { Box, ListItemText, Typography, styled } from "@mui/material";
+import { AppBar, Box, ListItemText, Typography, styled } from "@mui/material";
+
+export const StyledAppBar = styled(AppBar)({
+  backgroundColor: '#2b3cd5', 
+});
 
 export const DrawerBox = styled(Box)(({ theme }) => ({
   width: 250,

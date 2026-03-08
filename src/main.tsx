@@ -4,6 +4,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.tsx'
 import './index.css'
 
+//pages
+import CreatePage from './pages/Create/create.tsx'
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -11,7 +14,7 @@ const router = createBrowserRouter([
     children: [
       // { path: "users", element: <UsersPage /> },
       // { path: "classes", element: <ClassesPage /> },
-      // { path: "edit", element: <EditPage /> },
+      { path: "edit", element: <CreatePage /> },
     ],
   },
 ]);
