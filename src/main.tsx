@@ -6,13 +6,14 @@ import './index.css'
 
 //pages
 import CreatePage from './pages/Create/create.tsx'
+import StudentsListPage from './pages/StudentsList/studentsList.tsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      // { path: "users", element: <UsersPage /> },
+      { path: "users", element: <StudentsListPage /> },
       // { path: "classes", element: <ClassesPage /> },
       { path: "edit", element: <CreatePage /> },
     ],

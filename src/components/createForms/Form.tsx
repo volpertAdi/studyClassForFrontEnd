@@ -3,7 +3,7 @@ import { TextField } from '@mui/material';
 import * as S from './formsStyles';
 
 //consts
-import { SAVE_TEXT, STUDENT_FIELDS } from '../../consts/createFormConsts';
+import { SAVE_TEXT } from '../../consts/createFormConsts';
 
 //types
 import type { GenericFormProps } from '../../types/createFormsTypes';
