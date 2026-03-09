@@ -27,3 +27,8 @@ export interface GenericFormProps<T> {
   title: string;                 
   onSave: (data: T) => void;     
 }
+
+export interface ClassSelectProps {
+  classes: Classroom[];
+  onSelect: (classId: string) => void;
+}

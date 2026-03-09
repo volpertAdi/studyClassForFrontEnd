@@ -16,3 +16,12 @@ export const createClassroom = async (classData: Classroom) => {
     throw error;
   }
 };
+
+export const getAllClassrooms = async () => {
+  try {
+    const response = await api.get('/classroom');
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

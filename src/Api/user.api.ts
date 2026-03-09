@@ -1,3 +1,4 @@
+import { idID } from "@mui/material/locale";
 import type { student } from "../types/createFormsTypes";
 import api from "./api";
 
@@ -22,6 +23,27 @@ export const getAllStudents = async (): Promise<student[]> => {
     return response.data;
   } catch (error) {
     console.error('Error fetching students:', error);
+    throw error;
+  }
+};
+
+export const deleteStudent = async (id: string) => {
+  try {
+    await api.delete(`/user/${id}`);
+  } catch (error) {
+    console.error('Error deleting student:', error);
+    throw error;
+  }
+};
+
+export const updateStudentClass = async (studentId: string, classId: string) => {
+  try {
+    const response = await api.patch(`/user/${studentId}/update-class`, {
+      classroomId: classId 
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error updating class:', error);
     throw error;
   }
 };

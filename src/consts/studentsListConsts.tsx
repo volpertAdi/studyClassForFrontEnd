@@ -12,7 +12,7 @@ export const STUDENT_COLUMNS: ColumnConfig[] = [
     label: 'Assign',
     render: (row, { onAssign }) => (
       <Button variant="outlined" onClick={() => onAssign(row.id)}>
-        ASSIGN TO CLASS
+        {!!row.classroomId ? 'REASSIGN' : 'ASSIGN TO CLASS'}
       </Button>
     )
   },
@@ -26,3 +26,5 @@ export const STUDENT_COLUMNS: ColumnConfig[] = [
     )
   },
 ];
+
+export const CLASS_SELECT_TITLE = 'Available Classes';
