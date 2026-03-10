@@ -7,6 +7,7 @@ import './index.css'
 //pages
 import CreatePage from './pages/Create/create.tsx'
 import StudentsListPage from './pages/StudentsList/studentsList.tsx'
+import ClassroomsPage from './pages/ClassRoomList/ClassroomList.jsx'
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "users", element: <StudentsListPage /> },
-      // { path: "classes", element: <ClassesPage /> },
+      { path: "classes", element: <ClassroomsPage />},
       { path: "edit", element: <CreatePage /> },
     ],
   },

@@ -25,3 +25,12 @@ export const getAllClassrooms = async () => {
     throw error;
   }
 };
+
+export const deleteClassroom = async (id: string) => {
+  try {
+    await api.delete(`/classroom/${id}`);
+  } catch (error) {
+    console.error('Error deleting classroom:', error);
+    throw error;
+  }
+};

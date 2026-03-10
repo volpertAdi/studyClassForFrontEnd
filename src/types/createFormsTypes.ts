@@ -12,6 +12,7 @@ export interface Classroom {
   name: string;
   seatsLeft: number;
   maxSeats: number; 
+  users: student[];
 }
 
 export interface FormFieldConfig<T> {

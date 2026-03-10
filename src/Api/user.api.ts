@@ -46,3 +46,12 @@ export const updateStudentClass = async (studentId: string, classId: string) => 
     throw error;
   }
 };
+
+export const deleteStudentClass = async (studentId: string) => {
+  try {
+    await api.patch(`/user/${studentId}/remove-class`);
+  } catch (error) {
+    console.error('Error updating class:', error);
+    throw error;
+  }
+};

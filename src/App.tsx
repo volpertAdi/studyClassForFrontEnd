@@ -8,9 +8,7 @@ function App() {
     <NotificationProvider> 
       <CssBaseline />
       <Header />
-      <main style={{ padding: '20px' }}>
-        <Outlet />
-      </main>
+      <Outlet />
     </NotificationProvider>
   );
 }
