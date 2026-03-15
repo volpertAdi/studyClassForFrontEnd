@@ -13,8 +13,6 @@ import * as S from './ClassroomStyles';
 import ClassroomCard from '../../components/ClassRoomCard/ClassRoomCard';
 import ClassStudentsModal from '../../components/StudentsClassModal/StudentsClassModal';
 
-
-
 const ClassroomsPage = () => {
   const [isListOpen, setIsListOpen] = useState(false);
   const [selectedClass, setSelectedClass] = useState<Classroom | null>(null);
@@ -24,7 +22,8 @@ const ClassroomsPage = () => {
   const loadData = async () => {
     try {
       const data = await getAllClassrooms();
-      setClassrooms(data);
+      const sortedData = [...data].sort((prev, curr) => prev.id.localeCompare(curr.id));
+      setClassrooms(sortedData);
     } catch {
       showModal('שגיאה', 'לא ניתן לטעון את הכיתות', 'error');
     }
@@ -35,7 +34,6 @@ const ClassroomsPage = () => {
   }, []);
 
   const handleDeleteClass = async (id: string) => {
-    // מומלץ להוסיף כאן לוגיקת אישור (Confirm) לפני מחיקה
     try {
       await deleteClassroom(id);
       showModal('הצלחה', 'הכיתה נמחקה בהצלחה', 'success');

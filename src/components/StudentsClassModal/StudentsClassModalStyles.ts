@@ -1,4 +1,4 @@
-import { Box, Typography, styled, Avatar } from '@mui/material';
+import { Box, Typography, styled, Avatar, IconButton } from '@mui/material';
 
 export const ModalWrapper = styled(Box)({
   padding: '24px',
@@ -36,4 +36,10 @@ export const GrayAvatar = styled(Avatar)({
 export const StudentName = styled(Typography)({
   fontSize: '1.1rem',
   fontWeight: 500,
+});
+
+export const RemoveStudentButton = styled(IconButton)<{ mainColor?: string }>({
+  '&:hover': {
+    backgroundColor: 'rgba(63, 81, 181, 0.08)',
+  },
 });

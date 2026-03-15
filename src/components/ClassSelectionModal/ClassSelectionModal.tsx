@@ -8,8 +8,12 @@ import * as S from './ClassSelectionModalStyles';
 import type { ClassSelectProps } from '../../types/createFormsTypes';
 //consts
 import { CLASS_SELECT_TITLE } from '../../consts/studentsListConsts';
+//context
+import { useAppTheme } from '../../context/ThemeContext/ThemeContext';
 
 const ClassSelectionModal = ({ classes, onSelect }: ClassSelectProps) => {
+  const {mainColor } = useAppTheme();
+  
   return (
     <S.ModalContainer>
       <S.ModalTitle>{CLASS_SELECT_TITLE}</S.ModalTitle>
@@ -23,7 +27,7 @@ const ClassSelectionModal = ({ classes, onSelect }: ClassSelectProps) => {
               <S.ClassNameText>{cls.name}</S.ClassNameText>
             </S.ClassInfo>
 
-            <S.AddButton onClick={() => onSelect(cls.id)}>
+            <S.AddButton onClick={() => onSelect(cls.id)} sx={{ color: mainColor }}>
               <AddCircleOutlineIcon fontSize="medium" />
             </S.AddButton>
           </S.StyledListItem>

@@ -1,10 +1,12 @@
-import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import * as S from './ClassroomCardStyles';
 import type { ClassCardProps } from '../../types/ClassroomPageTypes';
 import { OUT_OFF, SEATS_LEFT, STUDNTS_LIST, THERE_ARE } from '../../consts/ClassPageConsts';
+import { useAppTheme } from '../../context/ThemeContext/ThemeContext';
 
 const ClassroomCard = ({ classroom, onDelete, onOpenList }: ClassCardProps) => {
+  const {mainColor } = useAppTheme();
+
   return (
     <S.CardContainer>
       <S.ClassTitle>{classroom.name}</S.ClassTitle>
@@ -23,13 +25,13 @@ const ClassroomCard = ({ classroom, onDelete, onOpenList }: ClassCardProps) => {
          {STUDNTS_LIST}
         </S.LinkText>
         
-        <IconButton 
+        <S.DeleteClassButton 
           onClick={() => onDelete(classroom.id)} 
-          size="small" 
-          sx={{ color: '#3f51b5' }} 
+          size="small"
+          sx={{ color: mainColor }}
         >
           <DeleteIcon fontSize="small" />
-        </IconButton>
+        </S.DeleteClassButton>
       </S.ActionsArea>
     </S.CardContainer>
   );

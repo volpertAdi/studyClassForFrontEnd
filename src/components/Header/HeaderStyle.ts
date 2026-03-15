@@ -1,8 +1,4 @@
-import { AppBar, Box, ListItemText, Typography, styled } from "@mui/material";
-
-export const StyledAppBar = styled(AppBar)({
-  backgroundColor: '#2b3cd5', 
-});
+import {Box, ListItemText, Switch, Typography, styled } from "@mui/material";
 
 export const DrawerBox = styled(Box)(({ theme }) => ({
   width: 250,
@@ -22,3 +18,22 @@ export const itemText = styled(ListItemText)({
     fontWeight: 500,
   },
 });
+
+export const ThemeToggleContainer = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
+});
+
+export const StyledThemeSwitch = styled(Switch)`
+  & .MuiSwitch-switchBase.Mui-checked {
+    color: #fff;
+  }
+  & .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+    background-color: #fff;
+    opacity: 0.7;
+  }
+  & .MuiSwitch-track {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+`;

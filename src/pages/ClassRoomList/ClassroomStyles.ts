@@ -11,7 +11,6 @@ export const CardsGrid = styled(Box)(({ theme }) => ({
   gridTemplateColumns: 'repeat(5, 1fr)', 
   gap: theme.spacing(3),
   width: '100%',
-  maxWidth: '1200px',
   justifyContent: 'center',
   
   '@media (max-width: 1100px)': { gridTemplateColumns: 'repeat(3, 1fr)' },

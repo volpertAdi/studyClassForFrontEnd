@@ -8,8 +8,12 @@ import { SAVE_TEXT } from '../../consts/createFormConsts';
 //types
 import type { GenericFormProps } from '../../types/createFormsTypes';
 
+//context
+import { useAppTheme } from '../../context/ThemeContext/ThemeContext';
+
 const GenericForm = <T extends Record<string, any>>(props: GenericFormProps<T>) => {
   const [formData, setFormData] = useState<T>(props.initialValues);
+  const {mainColor } = useAppTheme();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -38,7 +42,7 @@ const GenericForm = <T extends Record<string, any>>(props: GenericFormProps<T>) 
         />
       ))}
       
-      <S.ActionButton variant="contained" type="submit">
+      <S.ActionButton variant="contained" type="submit" mainColor={mainColor}>
        {SAVE_TEXT}
       </S.ActionButton>
     </S.FormSection>

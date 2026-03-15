@@ -1,5 +1,7 @@
 import { Button } from "@mui/material";
+import * as S from '../components/studentsTable/studentsStyle';
 import type { ColumnConfig } from "../types/studentsListTypes";
+import { useAppTheme } from "../context/ThemeContext/ThemeContext";
 
 export const STUDENT_COLUMNS: ColumnConfig[] = [
   { id: 'id', label: 'ID' },
@@ -7,14 +9,22 @@ export const STUDENT_COLUMNS: ColumnConfig[] = [
   { id: 'lastName', label: 'Last Name' },
   { id: 'age', label: 'Age' },
   { id: 'profession', label: 'Profession' },
-  { 
-    id: 'assign', 
+  {
+    id: 'assign',
     label: 'Assign',
-    render: (row, { onAssign }) => (
-      <Button variant="outlined" onClick={() => onAssign(row.id)}>
-        {!!row.classroomId ? 'REASSIGN' : 'ASSIGN TO CLASS'}
-      </Button>
-    )
+    render: (row, { onAssign }) => {
+      const { mainColor } = useAppTheme(); 
+      
+      return (
+        <S.AssignClassButton 
+          variant="outlined" 
+          onClick={() => onAssign(row.id)} 
+          mainColor={mainColor}
+        >
+          {!!row.classroomId ? 'REASSIGN' : 'ASSIGN TO CLASS'}
+        </S.AssignClassButton>
+      );
+    }
   },
   { 
     id: 'delete', 

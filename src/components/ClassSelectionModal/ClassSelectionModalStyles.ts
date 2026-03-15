@@ -44,9 +44,7 @@ export const ClassNameText = styled(Typography)({
   color: '#333',
 });
 
-// הכפתור החדש ב-Styled Components
 export const AddButton = styled(IconButton) ({
-  color: '#3f51b5',
   transition: 'all 0.2s ease-in-out',
   '&:hover': {
     backgroundColor: 'rgba(63, 81, 181, 0.08)',

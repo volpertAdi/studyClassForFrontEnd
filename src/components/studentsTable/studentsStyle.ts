@@ -1,4 +1,4 @@
-import { Paper, TableContainer, styled } from '@mui/material';
+import { Button, Paper, TableContainer, styled } from '@mui/material';
 
 export const StyledTableRoot = styled(Paper)(({ theme }) => ({
   maxWidth: '1200px',
@@ -12,3 +12,14 @@ export const StyledTableRoot = styled(Paper)(({ theme }) => ({
 export const StyledTableContainer = styled(TableContainer)({
   maxHeight: '70vh', 
 });
+
+export const AssignClassButton = styled(Button, {shouldForwardProp: (prop) => prop !== 'mainColor'})<{ mainColor?: string }>(({ mainColor }) => ({
+  borderColor: mainColor,
+  color: mainColor,
+  fontWeight: 600,
+  fontSize: '0.8rem',
+  '&:hover': {
+    borderColor: mainColor,
+    backgroundColor: 'rgba(63, 81, 181, 0.04)',
+  },
+}));

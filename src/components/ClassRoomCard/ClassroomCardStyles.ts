@@ -1,19 +1,19 @@
-import { Box, Card, styled, Typography } from '@mui/material';
+import { Box, Card, IconButton, styled, Typography } from '@mui/material';
 
 export const CardContainer = styled(Card)(({ theme }) => ({
   padding: theme.spacing(3),
   borderRadius: '16px',
   display: 'flex',
   flexDirection: 'column',
-  maxHeight: '220px', 
+  Height: '250px', 
   direction: 'ltr',
    boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.1)',
   textAlign: 'left', 
 }));
 
 export const ClassTitle = styled(Typography)({
-  fontWeight: 800,
-  fontSize: '1.8rem',
+  fontWeight: 700,
+  fontSize: '1.5rem',
   marginBottom: '16px',
   textTransform: 'capitalize',
 });
@@ -52,5 +52,14 @@ export const LinkText = styled('span')({
   color: '#333',
   '&:hover': {
     textDecoration: 'underline',
+  },
+});
+
+export const DeleteClassButton = styled(IconButton)({
+  padding: '4px',
+  transition: 'all 0.2s ease-in-out',
+  '&:hover': {
+    backgroundColor: 'rgba(63, 81, 181, 0.04)',
+    transform: 'scale(1.1)',
   },
 });

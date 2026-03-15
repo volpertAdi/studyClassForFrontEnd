@@ -12,14 +12,14 @@ export const FormTitle = styled(Typography)({
   marginBottom: '24px',
 });
 
-export const ActionButton = styled(Button)({
+export const ActionButton = styled(Button)<{ mainColor?: string }>(({ mainColor }) => ({
   marginTop: '8px',
   padding: '10px',
   fontWeight: 'bold',
-  backgroundColor: '#2b3cd5', 
+  backgroundColor: mainColor, 
   color: '#fff',           
   
   '&:hover': {
-    backgroundColor: '#1d2a9d',
+    backgroundColor: mainColor,
   },
-});
+}));

@@ -24,7 +24,8 @@ const StudentsListPage = () => {
   const fetchData = async () => {
     try {
       const data = await getAllStudents();
-      setStudents(data);
+      const sortedData = [...data].sort((prev, curr) => prev.id.localeCompare(curr.id));
+      setStudents(sortedData);
     } catch {
       showModal('שגיאה', 'לא ניתן לטעון נתונים', 'error');
     }
@@ -44,8 +45,12 @@ const StudentsListPage = () => {
 
   const handleOpenAssign = async (studentId: string) => {
     try {
+      const currentStudent = students.find(s => s.id === studentId);
       const classData = await getAllClassrooms();
-      setClasses(classData);
+      
+      const filteredClasses = classData.filter((classroom: Classroom) => classroom.id !== currentStudent?.classroomId);
+
+      setClasses(filteredClasses);
       setSelectedStudentId(studentId);
       setIsAssignOpen(true);
     } catch {
