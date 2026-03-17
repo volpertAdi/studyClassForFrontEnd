@@ -1,5 +1,5 @@
 import type { student } from "../types/createFormsTypes";
-import api from "./api";
+import axiosInstance from "./api";
 
 export const createUser = async (userData: student) => {
   try {
@@ -8,7 +8,7 @@ export const createUser = async (userData: student) => {
       age: Number(userData.age)
     };
     
-    const response = await api.post('/user', payload); 
+    const response = await axiosInstance.post('/user', payload); 
     return response.data;
   } catch (error) {
     console.error('Error creating user:', error);
@@ -18,7 +18,7 @@ export const createUser = async (userData: student) => {
 
 export const getAllStudents = async (): Promise<student[]> => {
   try {
-    const response = await api.get('/user');
+    const response = await axiosInstance.get('/user');
     return response.data;
   } catch (error) {
     console.error('Error fetching students:', error);
@@ -28,7 +28,7 @@ export const getAllStudents = async (): Promise<student[]> => {
 
 export const deleteStudent = async (id: string) => {
   try {
-    await api.delete(`/user/${id}`);
+    await axiosInstance.delete(`/user/${id}`);
   } catch (error) {
     console.error('Error deleting student:', error);
     throw error;
@@ -37,7 +37,7 @@ export const deleteStudent = async (id: string) => {
 
 export const updateStudentClass = async (studentId: string, classId: string) => {
   try {
-    const response = await api.patch(`/user/${studentId}/update-class`, {
+    const response = await axiosInstance.patch(`/user/${studentId}/update-class`, {
       classroomId: classId 
     });
     return response.data;
@@ -49,7 +49,7 @@ export const updateStudentClass = async (studentId: string, classId: string) => 
 
 export const deleteStudentClass = async (studentId: string) => {
   try {
-    await api.patch(`/user/${studentId}/remove-class`);
+    await axiosInstance.patch(`/user/${studentId}/remove-class`);
   } catch (error) {
     console.error('Error updating class:', error);
     throw error;

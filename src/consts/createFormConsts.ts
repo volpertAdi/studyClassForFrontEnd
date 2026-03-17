@@ -41,7 +41,8 @@ export const emptyClass: Classroom = {
   id: '',
   name: '',
   seatsLeft: 0,
-  maxSeats: 0
+  maxSeats: 0,
+  users: []
 };
 
 export const SAVE_TEXT = 'שמור'  

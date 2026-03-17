@@ -28,7 +28,7 @@ const StudentsTable = ({ data, onAssign, onDelete }: DataTableProps) => {
                             <TableCell key={column.id} align="center">
                             {column.render 
                                 ? column.render(row, { onAssign, onDelete }) 
-                                : (row[column.id as keyof student] as any)}
+                                : (row[column.id as keyof student])}
                             </TableCell>
                         ))}
                         </TableRow>

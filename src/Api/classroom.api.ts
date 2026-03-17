@@ -1,5 +1,5 @@
 import type { Classroom } from "../types/createFormsTypes";
-import api from "./api";
+import axiosInstance from "./api";
 
 export const createClassroom = async (classData: Classroom) => {
   try {
@@ -9,7 +9,7 @@ export const createClassroom = async (classData: Classroom) => {
     };
     payload.seatsLeft = payload.maxSeats;
       
-    const response = await api.post('/classroom', payload);
+    const response = await axiosInstance.post('/classroom', payload);
     return response.data;
   } catch (error) {
     console.error('Error creating classroom:', error);
@@ -19,7 +19,7 @@ export const createClassroom = async (classData: Classroom) => {
 
 export const getAllClassrooms = async () => {
   try {
-    const response = await api.get('/classroom');
+    const response = await axiosInstance.get('/classroom');
     return response.data;
   } catch (error) {
     throw error;
@@ -28,7 +28,7 @@ export const getAllClassrooms = async () => {
 
 export const deleteClassroom = async (id: string) => {
   try {
-    await api.delete(`/classroom/${id}`);
+    await axiosInstance.delete(`/classroom/${id}`);
   } catch (error) {
     console.error('Error deleting classroom:', error);
     throw error;

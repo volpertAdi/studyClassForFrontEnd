@@ -37,7 +37,7 @@ const StudentsListPage = () => {
     try {
       await deleteStudent(id);
       showModal('הצלחה', 'הסטודנט נמחק', 'success');
-      fetchData();
+      await fetchData();
     } catch {
       showModal('שגיאה', 'המחיקה נכשלה', 'error');
     }
