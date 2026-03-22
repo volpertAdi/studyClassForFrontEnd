@@ -55,11 +55,12 @@ export const LinkText = styled('span')({
   },
 });
 
-export const DeleteClassButton = styled(IconButton)({
+export const DeleteClassButton = styled(IconButton, {shouldForwardProp: (prop) => prop !== 'mainColor'})<{ mainColor?: string }>(({ mainColor }) => ({
+  color: mainColor,
   padding: '4px',
   transition: 'all 0.2s ease-in-out',
   '&:hover': {
     backgroundColor: 'rgba(63, 81, 181, 0.04)',
     transform: 'scale(1.1)',
   },
-});
+}));

@@ -1,5 +1,5 @@
-import { createContext, useState, useContext, type ReactNode } from 'react';
-import { colors } from '../../consts/ThemeContextConsts';
+import { createContext, useState, useContext, type ReactNode, useMemo } from 'react';
+import { COLORS } from '../../consts/ThemeContextConsts';
 import type { ThemeColor, ThemeContextType } from '../../types/ThemeContextTypes';
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -7,12 +7,18 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [isPink, setIsPink] = useState(false);
 
-  const mainColor: ThemeColor = isPink ? colors[0] : colors[1];
+  const mainColor: ThemeColor = isPink ? COLORS.PINK : COLORS.BLUE;
 
   const toggleTheme = () => setIsPink((prev) => !prev);
 
+   const contextValues = useMemo(() => ({
+    mainColor,
+    toggleTheme
+    }), [mainColor]);
+
+
   return (
-    <ThemeContext.Provider value={{ mainColor, isPink, toggleTheme }}>
+    <ThemeContext.Provider value={contextValues}>
       {children}
     </ThemeContext.Provider>
   );

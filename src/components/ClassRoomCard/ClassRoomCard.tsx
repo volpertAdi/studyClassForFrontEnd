@@ -26,9 +26,9 @@ const ClassroomCard = ({ classroom, onDelete, onOpenList }: ClassCardProps) => {
         </S.LinkText>
         
         <S.DeleteClassButton 
-          onClick={() => onDelete(classroom.id)} 
+          onClick={() => onDelete(classroom)} 
           size="small"
-          sx={{ color: mainColor }}
+          mainColor={mainColor}
         >
           <DeleteIcon fontSize="small" />
         </S.DeleteClassButton>

@@ -35,21 +35,12 @@ export const deleteStudent = async (id: string) => {
   }
 };
 
-export const updateStudentClass = async (studentId: string, classId: string) => {
+export const assigntudentClass = async (studentId: string, classId: string | null) => {
   try {
-    const response = await axiosInstance.patch(`/user/${studentId}/update-class`, {
+    const response = await axiosInstance.patch(`/user/${studentId}/assign-class`, {
       classroomId: classId 
     });
     return response.data;
-  } catch (error) {
-    console.error('Error updating class:', error);
-    throw error;
-  }
-};
-
-export const deleteStudentClass = async (studentId: string) => {
-  try {
-    await axiosInstance.patch(`/user/${studentId}/remove-class`);
   } catch (error) {
     console.error('Error updating class:', error);
     throw error;

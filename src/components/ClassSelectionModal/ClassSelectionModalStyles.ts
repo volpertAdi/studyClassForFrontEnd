@@ -44,10 +44,11 @@ export const ClassNameText = styled(Typography)({
   color: '#333',
 });
 
-export const AddButton = styled(IconButton) ({
+export const AddButton = styled(IconButton, {shouldForwardProp: (prop) => prop !== 'mainColor'}) <{ mainColor?: string }>(({ mainColor }) =>  ({
+  color: mainColor,
   transition: 'all 0.2s ease-in-out',
   '&:hover': {
     backgroundColor: 'rgba(63, 81, 181, 0.08)',
     transform: 'scale(1.1)'
   },
-});
+}));

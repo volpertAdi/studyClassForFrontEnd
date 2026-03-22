@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Dialog } from '@mui/material';
 //api
-import { getAllClassrooms, deleteClassroom } from '../../Api/classroom.api';
-import { deleteStudentClass } from '../../Api/user.api';
+import { deleteClassroom } from '../../Api/classroom.api';
+import { assigntudentClass } from '../../Api/user.api';
 //types
 import type { Classroom } from '../../types/createFormsTypes';
 //context
@@ -12,32 +12,29 @@ import * as S from './ClassroomStyles';
 //component
 import ClassroomCard from '../../components/ClassRoomCard/ClassRoomCard';
 import ClassStudentsModal from '../../components/StudentsClassModal/StudentsClassModal';
+//store
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState } from '../../Store/store';
+import { deleteClassRoom, removeStudentFromClass } from '../../Store/Slices/ClassroomSlice';
+import { updateClassRoomStudent } from '../../Store/Slices/StudentsSlice';
 
 const ClassroomsPage = () => {
   const [isListOpen, setIsListOpen] = useState(false);
   const [selectedClass, setSelectedClass] = useState<Classroom | null>(null);
-  const [classrooms, setClassrooms] = useState<Classroom[]>([]);
   const { showModal } = useNotification();
 
-  const loadData = async () => {
-    try {
-      const data = await getAllClassrooms();
-      const sortedData = [...data].sort((prev, curr) => prev.id.localeCompare(curr.id));
-      setClassrooms(sortedData);
-    } catch {
-      showModal('שגיאה', 'לא ניתן לטעון את הכיתות', 'error');
-    }
-  };
+  const { classRooms } = useSelector((state: RootState) => state.classRooms);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  const handleDeleteClass = async (id: string) => {
+  const handleDeleteClass = async (classroom: Classroom) => {
     try {
-      await deleteClassroom(id);
-      showModal('הצלחה', 'הכיתה נמחקה בהצלחה', 'success');
-      loadData(); 
+      if(classroom.users.length == 0) {
+        await deleteClassroom(classroom.id);
+        showModal('הצלחה', 'הכיתה נמחקה בהצלחה', 'success');
+        dispatch(deleteClassRoom(classroom.id));
+      } else {
+        showModal('שגיאה', 'לא ניתן למחוק כיתה עם סטודנטים', 'error');
+      }
     } catch {
       showModal('שגיאה', 'מחיקת הכיתה נכשלה', 'error');
     }
@@ -50,10 +47,11 @@ const ClassroomsPage = () => {
 
   const handleRemoveStudent = async (studentId: string) => {
     try {
-      await deleteStudentClass(studentId);
+      await assigntudentClass(studentId, null);
       showModal('Success', 'Student removed from class', 'success');
       setIsListOpen(false);
-      loadData(); 
+      dispatch(removeStudentFromClass({ classId: selectedClass!.id, studentId }));
+      dispatch(updateClassRoomStudent({ studentId, classroomId: null }));
     } catch {
       showModal('Error', 'Failed to remove student', 'error');
     }
@@ -62,7 +60,7 @@ const ClassroomsPage = () => {
   return (
     <S.PageWrapper>
       <S.CardsGrid>
-        {classrooms.map((cls) => (
+        {classRooms.map((cls) => (
           <ClassroomCard 
             key={cls.id} 
             classroom={cls} 

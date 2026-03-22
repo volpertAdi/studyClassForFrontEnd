@@ -4,17 +4,24 @@ import { CssBaseline } from '@mui/material';
 //context
 import { NotificationProvider } from './context/NotificationContext';
 import { ThemeProvider } from './context/ThemeContext/ThemeContext';
+//store
+import { Provider } from 'react-redux';
+import { store } from './Store/store';
+import DataLoader from './components/DataLoader/DataLoader';
 
 function App() {
   return (
-    <ThemeProvider>
-      <NotificationProvider> 
-        <CssBaseline />
-        <Header />
-        <Outlet />
-      </NotificationProvider>
-    </ThemeProvider>
-    
+    <Provider store={store}>
+      <ThemeProvider>
+        <NotificationProvider>
+          <DataLoader> 
+            <CssBaseline />
+            <Header />
+            <Outlet />
+          </DataLoader>
+        </NotificationProvider>
+      </ThemeProvider>
+    </Provider>
   );
 }
 

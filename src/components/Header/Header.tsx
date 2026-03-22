@@ -8,11 +8,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 // context & consts
 import { useAppTheme } from '../../context/ThemeContext/ThemeContext';
+import {COLORS} from '../../consts/ThemeContextConsts'
 import { HEADER_TITLE, MENU_ITEMS } from '../../consts/headerConsts';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
-  const { isPink, toggleTheme, mainColor } = useAppTheme();
+  const { toggleTheme, mainColor } = useAppTheme();
+
+  const isPink = mainColor === COLORS.PINK;
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);

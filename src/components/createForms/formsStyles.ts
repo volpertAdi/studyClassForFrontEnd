@@ -12,7 +12,7 @@ export const FormTitle = styled(Typography)({
   marginBottom: '24px',
 });
 
-export const ActionButton = styled(Button)<{ mainColor?: string }>(({ mainColor }) => ({
+export const ActionButton = styled(Button, {shouldForwardProp: (prop) => prop !== 'mainColor'})<{ mainColor?: string }>(({ mainColor }) => ({
   marginTop: '8px',
   padding: '10px',
   fontWeight: 'bold',

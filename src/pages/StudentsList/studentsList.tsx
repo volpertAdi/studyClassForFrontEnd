@@ -1,43 +1,41 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Dialog } from '@mui/material';
 import * as S from './studentsListStyle';
 //context
 import { useNotification } from '../../context/NotificationContext';
 //types
-import type { Classroom, student } from '../../types/createFormsTypes';
+import type { Classroom } from '../../types/createFormsTypes';
 //api
-import { deleteStudent, getAllStudents, updateStudentClass } from '../../Api/user.api';
-import { getAllClassrooms } from '../../Api/classroom.api';
+import { deleteStudent, assigntudentClass } from '../../Api/user.api';
 //components
 import DataTable from '../../components/studentsTable/studentsTable';
 import ClassSelectionModal from '../../components/ClassSelectionModal/ClassSelectionModal';
-
+//store
+import { useDispatch, useSelector } from 'react-redux';
+import { addStudentToClass, removeStudentFromClass, selectAvailableClasses } from '../../Store/Slices/ClassroomSlice';
+import type { RootState } from '../../Store/store';
+import { deleteStudentStore, updateClassRoomStudent } from '../../Store/Slices/StudentsSlice';
 
 const StudentsListPage = () => {
-  const [students, setStudents] = useState<student[]>([]);
-  const [classes, setClasses] = useState<Classroom[]>([]);
   const [isAssignOpen, setIsAssignOpen] = useState(false);
   const [selectedStudentId, setSelectedStudentId] = useState<string | null>(null);
-  
+
+  const dispatch = useDispatch();
+  const { students } = useSelector((state: RootState) => state.students);
+  const availableClasses = useSelector(selectAvailableClasses);
+
   const { showModal } = useNotification();
 
-  const fetchData = async () => {
-    try {
-      const data = await getAllStudents();
-      const sortedData = [...data].sort((prev, curr) => prev.id.localeCompare(curr.id));
-      setStudents(sortedData);
-    } catch {
-      showModal('שגיאה', 'לא ניתן לטעון נתונים', 'error');
-    }
-  };
+  const currentStudent = students.find(s => s.id === selectedStudentId);
+  const filteredClasses = availableClasses.filter(
+    (classroom: Classroom) => classroom.id !== currentStudent?.classroomId
+  );
 
-  useEffect(() => { fetchData(); }, []);
-  
   const handleDelete = async (id: string) => {
     try {
       await deleteStudent(id);
       showModal('הצלחה', 'הסטודנט נמחק', 'success');
-      await fetchData();
+      dispatch(deleteStudentStore(id));
     } catch {
       showModal('שגיאה', 'המחיקה נכשלה', 'error');
     }
@@ -45,12 +43,6 @@ const StudentsListPage = () => {
 
   const handleOpenAssign = async (studentId: string) => {
     try {
-      const currentStudent = students.find(s => s.id === studentId);
-      const classData = await getAllClassrooms();
-      
-      const filteredClasses = classData.filter((classroom: Classroom) => classroom.id !== currentStudent?.classroomId);
-
-      setClasses(filteredClasses);
       setSelectedStudentId(studentId);
       setIsAssignOpen(true);
     } catch {
@@ -60,12 +52,19 @@ const StudentsListPage = () => {
 
   const confirmAssignment = async (classId: string) => {
     if (!selectedStudentId) return;
-    try {
-      await updateStudentClass(selectedStudentId, classId);
-      setIsAssignOpen(false);
 
+    try {
+      await assigntudentClass(selectedStudentId, classId);
+      setIsAssignOpen(false);
       showModal('הצלחה', 'הסטודנט שובץ בהצלחה', 'success'); 
-      fetchData(); 
+
+      const currStudent = students.find(s => s.id === selectedStudentId)!;
+      dispatch(addStudentToClass({ classId, student: currStudent }));
+
+      if(currStudent.classroomId) {
+        dispatch(removeStudentFromClass({ classId: currStudent.classroomId, studentId: selectedStudentId }));
+      }
+      dispatch(updateClassRoomStudent({ studentId: selectedStudentId,classroomId: classId }));
     } catch {
       showModal('שגיאה', 'השיבוץ נכשל', 'error');
     }
@@ -76,7 +75,7 @@ const StudentsListPage = () => {
       <DataTable data={students} onAssign={handleOpenAssign} onDelete={handleDelete} />
 
       <Dialog open={isAssignOpen} onClose={() => setIsAssignOpen(false)} maxWidth="xs" fullWidth>
-        <ClassSelectionModal classes={classes} onSelect={confirmAssignment} />
+        <ClassSelectionModal classes={filteredClasses} onSelect={confirmAssignment} />
       </Dialog>
     </S.PageWrapper>
   );

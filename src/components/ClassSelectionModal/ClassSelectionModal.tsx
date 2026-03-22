@@ -27,7 +27,7 @@ const ClassSelectionModal = ({ classes, onSelect }: ClassSelectProps) => {
               <S.ClassNameText>{cls.name}</S.ClassNameText>
             </S.ClassInfo>
 
-            <S.AddButton onClick={() => onSelect(cls.id)} sx={{ color: mainColor }}>
+            <S.AddButton onClick={() => onSelect(cls.id)} mainColor={mainColor}>
               <AddCircleOutlineIcon fontSize="medium" />
             </S.AddButton>
           </S.StyledListItem>

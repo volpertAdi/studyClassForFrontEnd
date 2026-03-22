@@ -34,3 +34,12 @@ export const deleteClassroom = async (id: string) => {
     throw error;
   }
 };
+
+export const getAllClassroomsAvailable = async () => {
+  try {
+    const response = await axiosInstance.get('/classroom/Available');
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

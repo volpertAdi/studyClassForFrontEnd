@@ -2,7 +2,7 @@ import type { Classroom, student } from "./createFormsTypes";
 
 export interface ClassCardProps {
   classroom: Classroom;
-  onDelete: (id: string) => void;
+  onDelete: (classroom: Classroom) => void;
   onOpenList: (classroom: Classroom) => void;
 }
 

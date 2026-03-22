@@ -38,8 +38,9 @@ export const StudentName = styled(Typography)({
   fontWeight: 500,
 });
 
-export const RemoveStudentButton = styled(IconButton)<{ mainColor?: string }>({
+export const RemoveStudentButton = styled(IconButton, {shouldForwardProp: (prop) => prop !== 'mainColor'})<{ mainColor?: string }>(({ mainColor }) =>  ({
+  color: mainColor,
   '&:hover': {
     backgroundColor: 'rgba(63, 81, 181, 0.08)',
   },
-});
+}));

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import App from './App.tsx'
 import './index.css'
 
@@ -14,6 +14,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
+      { index: true, element: <Navigate to="/users" replace /> },
       { path: "users", element: <StudentsListPage /> },
       { path: "classes", element: <ClassroomsPage />},
       { path: "edit", element: <CreatePage /> },

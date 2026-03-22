@@ -26,7 +26,7 @@ const ClassStudentsModal = ({ students, onRemove }: StudentsModalProps) => {
               </S.StudentName>
             </S.StudentInfo>
             
-            <S.RemoveStudentButton onClick={() => onRemove(student.id)} sx={{ color: mainColor }}>
+            <S.RemoveStudentButton onClick={() => onRemove(student.id)} mainColor={mainColor}>
               <DeleteIcon />
             </S.RemoveStudentButton>
           </S.StudentRow>

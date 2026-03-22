@@ -1,9 +1,8 @@
-import { colors } from '../consts/ThemeContextConsts';
+import { COLORS } from '../consts/ThemeContextConsts';
 
-export type ThemeColor = (typeof colors)[number]
+export type ThemeColor = typeof COLORS[keyof typeof COLORS];
 
 export interface ThemeContextType {
   mainColor: ThemeColor;
-  isPink: boolean;
   toggleTheme: () => void;
 }

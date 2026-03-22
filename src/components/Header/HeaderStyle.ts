@@ -25,15 +25,15 @@ export const ThemeToggleContainer = styled(Box)({
   gap: '8px',
 });
 
-export const StyledThemeSwitch = styled(Switch)`
-  & .MuiSwitch-switchBase.Mui-checked {
-    color: #fff;
-  }
-  & .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
-    background-color: #fff;
-    opacity: 0.7;
-  }
-  & .MuiSwitch-track {
-    background-color: rgba(255, 255, 255, 0.5);
-  }
-`;
+export const StyledThemeSwitch = styled(Switch)({
+  '& .MuiSwitch-switchBase.Mui-checked': {
+    color: '#fff',
+  },
+  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+    backgroundColor: '#fff',
+    opacity: 0.7,
+  },
+  '& .MuiSwitch-track': {
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+  },
+});
